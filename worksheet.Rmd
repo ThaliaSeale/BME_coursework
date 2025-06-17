@@ -1,8 +1,6 @@
 ---
 title: "Biostatistics"
-output:
-  html_document:
-    df_print: paged
+output: html_document
 ---
 
 # Basics of R Operations
@@ -69,6 +67,7 @@ If we apply binary operation on two vectors of different lengths, the smaller on
 1:10 * c(-1,1)
 1:3 + rep(seq(from = 0, by = 10, to = 30), each = 3)
 ```
+
 What happens when the vectors are the same length?
 
 ### EXERCISE 1
@@ -125,6 +124,7 @@ x[c(1, 6, 3)]
 x[1:3]
 x[3:length(x)]
 ```
+
 Removing entries:
 
 ```{r}
@@ -148,6 +148,7 @@ x != 99
 (x == 10) | (x > 40) # OR
 !(x > 40)            # NOT
 ```
+
 ```{r}
 x[(x == 5) | (x > 40)]
 ```
@@ -180,8 +181,6 @@ First let's load some data...
 ```{r}
 data('cars')
 ```
-
-
 
 Have a look through the dataset:
 
@@ -247,8 +246,7 @@ mean(cars$dist)
 median(cars$dist)
 ```
 
-Why do you think there is a discrepancy between the mean and the median?
-What could be the advantage of using the median over then mean, in general?
+Why do you think there is a discrepancy between the mean and the median? What could be the advantage of using the median over then mean, in general?
 
 ## Standard deviation
 
@@ -293,7 +291,7 @@ What do you think the skewness is measuring?
 
 ## Boxplot
 
-We can visualise the distribution of variables using a "Box and Whisker plot", or "Boxplot". 
+We can visualise the distribution of variables using a "Box and Whisker plot", or "Boxplot".
 
 This requires us to reformat the data:
 
@@ -345,35 +343,37 @@ Create a violin plot for the variables in the datasets and comment on the distri
 ```{r}
 ?geom_violin
 ```
- 
+
 # Probability and Distributions
 
 There are several useful functions when dealing with probability distributions.
 
 As a reminder, here are some common probability distributions:
 
-- *Binomial-* The number of successes occurring for a fixed number of trials. For example, the number of heads when a coin is flipped $n$ times.
-- *Poisson-* The number of events occurring in a fixed time interval. For example, the calls received by a call center in 1 hour.
-- *Normal-* A continuous variable which is symmetric.
+-   *Binomial-* The number of successes occurring for a fixed number of trials. For example, the number of heads when a coin is flipped $n$ times.
+-   *Poisson-* The number of events occurring in a fixed time interval. For example, the calls received by a call center in 1 hour.
+-   *Normal-* A continuous variable which is symmetric.
 
 ## Cumulative mass/density function
 
-The *cumulative mass/density function** gives the probability that a random variable will be less than or equal to a particular value.
+The \*cumulative mass/density function\*\* gives the probability that a random variable will be less than or equal to a particular value.
 
-For example, 
+For example,
 
 ```{r}
 ?pbinom
 pbinom(3, size = 10, prob = 0.3)
 ```
+
 gives the probability of seeing at most 3 heads if we have 10 biased coin flips, with a probability 0.3 of landing a heads each time.
 
 ```{r}
 pnorm(3, mean = 0, sd = 1)
 ```
+
 gives the probability that random variable with a normal distribution with mean 0 and sd 1 will be at most 3.
 
-# EXERCISE 7
+### EXERCISE 7
 
 Suppose that around a particular time of day, an average of 6 cars pass a particular part of the road every minute. You can assume that this rate is constant.
 
@@ -391,21 +391,24 @@ What is the probability that between 6 and 8 cars inclusive pass the junction in
 
 ## Probability mass/density function (PMF, PDF)
 
-The *probability mass/density function** gives the probability (for a discrete distribution) or the probability density (for a continuous distribution) for a particular value that the random variable can take.
+The \*probability mass/density function\*\* gives the probability (for a discrete distribution) or the probability density (for a continuous distribution) for a particular value that the random variable can take.
 
-For example, 
+For example,
+
 ```{r}
 dbinom(3, size = 10, prob = 0.3)
 ?pbinom
 ```
+
 gives the probability of seeing 3 heads if we have 10 biased coin flips, with a probability 0.3 of landing a heads each time.
 
 ```{r}
 dnorm(3, mean = 0, sd = 1)
 ```
+
 gives the probability density for a normal distribution with mean 0 and sd 1 at 3.
 
-### EXERCISE 7
+### EXERCISE 8
 
 What is the probability that a normally distributed variable with mean 0 and sd 1 is equal to 0.5?
 
@@ -419,25 +422,31 @@ Can you think of any practical applications in Biostatistics for the PMF/PDF and
 
 The *quantile function* gives the smallest value below which the random variable takes with a probability at least $p$. (Yes this is a bit confusing describing without mathematics... but we will provide examples!!!)
 
-For example, a normally distributed variable with mean 0 and sd 1 will take a value less than 
+For example, a normally distributed variable with mean 0 and sd 1 will take a value less than
+
 ```{r}
 qnorm(0.95)
 ```
+
 is 0.95.
 
-A binomially distributed variable with size 10, probability 0.3 of success will take a value less than or equal to 
+A binomially distributed variable with size 10, probability 0.3 of success will take a value less than or equal to
+
 ```{r}
 qbinom(0.1, size = 10, prob = 0.3)
 ```
-**at least** 0.1 of the time. Note that 
+
+**at least** 0.1 of the time. Note that
+
 ```{r}
 pbinom(1, size = 10, prob = 0.3)
 ```
+
 so, it is not that it is less than 1 with a probability of exactly 0.1, but is the smallest value that the variable is less than with probability *at least* 0.1.
 
 So we can think of the quantile function as a kind of pseudo-inverse function for the cumulative distribution function.
 
-### EXERCISE 8
+### EXERCISE 9
 
 Moles are known to be the sites of melanoma development, so it is important to assess moles to determine if they might be cancerous.
 
@@ -458,16 +467,16 @@ Why do you think the quantile function is an exact inverse for continuous random
 Finally, we can also generate random samples
 
 For example,
+
 ```{r}
 rbinom(5, size = 10, prob = 0.3)
 ```
+
 produces 5 samples from the binomial distribution.
 
-### EXERCISE 9
+### EXERCISE 10
 
-Take 1000 samples from the binomial distribution with size 100, probability 0.3 of success.
-Take 1000 samples from the normal distribution with mean 30, sd 4.58.
-Select a method to visualise the distribution of the samples. What do you notice?
+Take 1000 samples from the binomial distribution with size 100, probability 0.3 of success. Take 1000 samples from the normal distribution with mean 30, sd 4.58. Select a method to visualise the distribution of the samples. What do you notice?
 
 ```{r}
 # ANSWER HERE
@@ -483,15 +492,19 @@ Statistical hypothesis tests are helpful tools to determine if there is sufficie
 
 Typically this is done by:
 
-1. **Making a statistical hypothesis.** This is a statement about the underlying distribution of random variable. For example, the mean length of a mole is 6.0mm.
+1.  **Making a statistical hypothesis.** This is a statement about the underlying distribution of random variable. For example, the mean length of a mole is 6.0mm.
 
-2. **Calculating the test statistic.** The test statistic is a numerical summary of the data that we can compare to our distributional assumptions.
+2.  **Calculating the test statistic.** The test statistic is a numerical summary of the data that we can compare to our distributional assumptions.
 
-3. a) **Calculating the p-value.** We then calculate the probability of the test statistic occurring under our assumptions. If it is sufficiently low, this is interpreted as evidence that our starting hypothesis was not correct.
+3.  
 
-3. b) **Calculating the critical value.** We can also calculate a threshold value for the test statistic. If the test statistic is beyond this threshold, the critical value, then this is evidence that our starting hypothesis was not correct.
+    a)  **Calculating the p-value.** We then calculate the probability of the test statistic occurring under our assumptions. If it is sufficiently low, this is interpreted as evidence that our starting hypothesis was not correct.
 
-### EXERCISE 10
+4.  
+
+    b)  **Calculating the critical value.** We can also calculate a threshold value for the test statistic. If the test statistic is beyond this threshold, the critical value, then this is evidence that our starting hypothesis was not correct.
+
+### EXERCISE 11
 
 We are now going to attempt a simple hypothesis test to determine if a certain coin is fair or not...!
 
@@ -499,8 +512,7 @@ You flip the coin 20 times, and it comes up heads 13 times.
 
 *Making the hypothesis.* We can assume that the coin is innocent... until proven guilty! What should we state as our **null hypothesis** ($H_0$), i.e. our starting hypothesis and our **alternative hypothesis** ($H_1$).
 
-$H_0$: YOUR ANSWER HERE
-$H_1$: YOUR ANSWER HERE
+$H_0$: YOUR ANSWER HERE $H_1$: YOUR ANSWER HERE
 
 *Test statistic.* In this case we can use 13, the number of heads, as the test statistic.
 
@@ -532,7 +544,7 @@ Unfortunately, hypothesis tests can only give us a principled way of updating ou
 
 **Type II Error-** We accept a false null hypothesis.
 
-### EXERCISE 11
+### EXERCISE 12
 
 Back to the dermatology clinic...
 
@@ -546,7 +558,54 @@ Let us adopt a 5% significance level. What would. be the type I and II errors wh
 
 What kind of problems could each type of error cause to the patient, and what would your suggestion be to improve the test based on your calculation?
 
-# Correlation and Regression
+## Useful statistical tests
+
+### Student's t-test
+
+*Assumptions.* The samples $X_i \sim N(\mu, \sigma^2)$ are independent and normally distributed.
+
+*Hypotheses.* 
+
+$H_0:  \mu = a$.
+$H_1:  \mu \neq a$ or $\mu < a$ or $\mu > a$. I.e. the alternative is that $\mu$ is different somehow from the value that we expected.
+
+*Test statistic.* $t = (\bar{x} - \mu)/(s/\sqrt{n})$, where $\bar{x}$ is the sample mean, $s$ is the sample sd and $n$ is the number of samples. The test statistic has a $T_{n-1}$ distribution, where the subscript denotes the degrees of freedom.
+
+Luckily, all of this is implemented in R:
+
+```{r}
+x <- c(7.8, 6.6, 6.5, 7.4, 7.3, 7., 6.4, 7.1, 6.7, 7.6, 6.8)
+t.test(x, mu = 6)
+```
+
+### Shapiro-Wilk Test for Normality
+
+*Hypotheses.* 
+
+Let $X$ be the random variable.
+
+$H_0: X$ is normally distributed.
+$H_1: X$ is not normally distributed.
+
+```{r}
+shapiro.test(x)
+```
+
+### Wilcoxon Signed Rank Test
+
+*Assumptions.* The data are independent samples from an symmetric distribution.
+
+*Hypotheses.* 
+
+Let $m$ be the median of the data distribution.
+
+$H_0: m = a.$ 
+$H_1:  m \neq a$ or $m < a$ or $m > a$. I.e. the alternative is that $m$ is different somehow from the value that we expected.
+
+### EXERCISE 13
+
+1. Load `CardioGoodFitness.csv`. This is data is from individuals who purchased a treadmill over a 3 month period.
+
 Troubleshooting...
 
 The code is looking for files in the working directory (wd):
@@ -556,3 +615,98 @@ getwd() # get the working directory
 ```
 
 If you can't load the file, check it is in the right location!
+
+2. Conduct an exploratory analysis of the data. What possible relationships might there be between certain characteristics and the number of miles run by the participants?
+
+3. What are some questions that we can try to answer with this data? Develop a statistical hypothesis to answer your question and perform the relevant statistical tests.
+
+```{r}
+# YOUR ANSWER HERE
+```
+
+# Correlation and Regression
+
+### EXERCISE 14
+
+In your previous analysis of the CardioGoodFitness dataset, did you observe any correlations between the variables?
+
+Calculate the correlation between Education and Income.
+
+Calculate the correlation matrix between the numerical variables in the dataset.
+
+```{r}
+?cor
+# YOUR ANSWER HERE
+```
+
+Plot the correlation matrix as a heatmap. Hint: You will need to pivot the correlation matrix.
+
+```{r}
+?select_if
+?as.data.frame
+?rownames_to_column
+?rename
+?pivot_longer
+
+# geom_tile
+
+# YOUR ANSWER HERE
+```
+
+## Correlation Tests
+
+Let $\rho$ be the population correlation coefficient.
+Let $r$ be the sample correlation coefficient.
+
+Can you guess what the null and alternative hypotheses for the correlation test is?
+
+There are two main correlation tests.
+
+*Pearson's.* Requires X and Y are bivariate normal.
+*Spearman's.* Useful when the data is not normal, or is ordinal (ranked).
+
+### EXERCISE 15
+
+Test the correlation betwen Age and Income using Pearson's correlation coefficient.
+
+```{r}
+?cor.test
+# YOUR ANSWER HERE
+```
+
+What do you think might be the issue with using Pearson's correlation coefficient in this case? Can you provide evidence for this?
+
+Perform a more appropriate test.
+
+## Regression Analysis
+
+At the most simple level, regression attempts to learn the relationshipo $f$ between the independent (observed) variables $x$ and the dependent (reponse) variable $y$ through learning on the dataset.
+
+### Linear regression
+
+This is the simplest regression, where we try to find a straight line that fits the data best. 
+
+### EXERCISE 16
+
+Perform a regression of income against age in the CardioGoodFitness.
+
+```{r}
+?lm
+# YOUR ANSWER HERE
+```
+
+Summarise the results. Can you interpret the result?
+
+```{r}
+?summary
+# YOUR ANSWER HERE
+```
+
+Try including all variables numerical variables in the regression. 
+
+```{r}
+# YOUR ANSWER HERE
+```
+
+Suppose we think that Age might be related to the number of miles a user runs on the treadmill. Does this analysis support this idea?
+
