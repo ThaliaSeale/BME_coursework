@@ -3,6 +3,10 @@ title: "Biostatistics"
 output: html_document
 ---
 
+```{r, include=FALSE}
+knitr::opts_chunk$set(eval = FALSE)
+```
+
 # Basics of R Operations
 
 ## Basic operations
@@ -17,6 +21,8 @@ Assignment operator:
 x <- 15
 x + 97 -> y # a right arrow also works! 
 ```
+
+You can check the value of assigned variables in the "Environment" pane of RStudio!
 
 `=` also works for assignment:
 
@@ -210,6 +216,7 @@ cars
 
 ```{r}
 ?plot
+# ANSWER HERE
 ```
 
 ## Better graphs...
@@ -217,7 +224,7 @@ cars
 You can download new packages from CRAN that expands the functionality of R:
 
 ```{r}
-install.packages('ggplot2') # install the package
+# install.packages('ggplot2') # install the package
 library(ggplot2) # load the package
 ```
 
@@ -233,10 +240,11 @@ ggplot(cars, aes(x = speed)) +
 What is `aes` doing?
 
 (i) Change the above plot to a horizontal bar plot.
-(ii) Create different colour bars for men and women.
+(ii) Create different colour bars for speeds greater than 10.
 
 ```{r}
 ?geom_histogram
+# ANSWER HERE
 ```
 
 ## Measures of Central Tendency
@@ -252,7 +260,7 @@ Why do you think there is a discrepancy between the mean and the median? What co
 
 ```{r}
 sd(cars$dist)
-sd(cars$dist)
+sd(cars$speed)
 ```
 
 ### EXERCISE 4
@@ -278,7 +286,7 @@ What aspect of the distribution does the standard deviation control?
 ## Skewness
 
 ```{r}
-install.packages('moments')
+# install.packages('moments')
 library(moments)
 ```
 
@@ -342,6 +350,7 @@ Create a violin plot for the variables in the datasets and comment on the distri
 
 ```{r}
 ?geom_violin
+# ANSWER HERE
 ```
 
 # Probability and Distributions
@@ -396,8 +405,8 @@ The \*probability mass/density function\*\* gives the probability (for a discret
 For example,
 
 ```{r}
+?dbinom
 dbinom(3, size = 10, prob = 0.3)
-?pbinom
 ```
 
 gives the probability of seeing 3 heads if we have 10 biased coin flips, with a probability 0.3 of landing a heads each time.
@@ -454,13 +463,13 @@ A dermatologist is studying mole width as an indicator of melanoma. In healthy p
 
 The dermatologist suspects that a particular patient's moles may be unusually large, which could indicate melanoma.
 
-If the mean width of a sample of 10 moles is measured, what is the minimum sample mean that would allow the dermatologist to be at least 95% confident that the mole widths are abnormally large—suggesting the presence of melanoma?
+If the mean width of a sample of 10 moles is measured, what is the width above which there is only 5% chance that mole is normal— suggesting the presence of melanoma?
 
 ```{r}
 # ANSWER HERE
 ```
 
-Why do you think the quantile function is an exact inverse for continuous random variables but not for descrete random variables?
+Why do you think the quantile function is an exact inverse for continuous random variables but not for discrete random variables?
 
 ## Sample generation
 
@@ -516,13 +525,13 @@ $H_0$: YOUR ANSWER HERE $H_1$: YOUR ANSWER HERE
 
 *Test statistic.* In this case we can use 13, the number of heads, as the test statistic.
 
-*p-value method.* What is the probability under the null hypothesis $H_0$ that the coin would produce 13 heads?
+*p-value method.* What is the probability under the null hypothesis $H_0$ that the coin would produce less than 13 heads?
 
 ```{r}
 # YOUR ANSWER HERE
 ```
 
-*Critical value method.* Suppose we would only conclude that the coin is unfair if there was less than a 5% chance that we would observe the test statistic under the null hypothesis $H_0$. The probability threshold we refer to here is known as the **significance level**. What would be the minimum value that would cause us to reject $H_0$?
+*Critical value method.* Suppose we would only conclude that the coin is unfair if there was less than a 5% chance that we would observe the test statistic under the null hypothesis $H_0$. The probability threshold we refer to here is known as the **significance level**. What range of values would cause us to reject $H_0$?
 
 ```{r}
 # YOUR ANSWER HERE
@@ -548,7 +557,7 @@ Unfortunately, hypothesis tests can only give us a principled way of updating ou
 
 Back to the dermatology clinic...
 
-(To reiterate:) In healthy patients, mole widths are normally distributed with a mean of 6.0 mm, and the standard deviation of the sample mean from 10 moles is 0.2 mm. Suppose that in a particular patient, their mole width is normally distributed with a mean of 5.0 mm instead.
+(To reiterate:) In healthy patients, mole widths are normally distributed with a mean of 6.0 mm, and the standard deviation of the sample mean from 10 moles is 0.2 mm. Suppose that in a particular patient, their mole width is normally distributed with a mean of 6.2 mm instead.
 
 Let us adopt a 5% significance level. What would. be the type I and II errors when testing for melanoma in this case?
 
