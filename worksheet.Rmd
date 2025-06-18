@@ -557,7 +557,7 @@ Unfortunately, hypothesis tests can only give us a principled way of updating ou
 
 Back to the dermatology clinic...
 
-(To reiterate:) In healthy patients, mole widths are normally distributed with a mean of 6.0 mm, and the standard deviation of the sample mean from 10 moles is 0.2 mm. Suppose that in a particular patient, their mole width is normally distributed with a mean of 6.2 mm instead.
+(To reiterate:) In healthy patients, mole widths are normally distributed with a mean of 6.0 mm, and the standard deviation of the sample mean from 10 moles is 0.2 mm. Suppose the cancerous moles are normally distributed with a mean of 6.4 mm instead.
 
 Let us adopt a 5% significance level. What would. be the type I and II errors when testing for melanoma in this case?
 
